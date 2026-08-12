@@ -28,7 +28,9 @@ $result = $mysqli->query("SELECT * FROM posts ORDER BY id DESC");
 <?php while ($row = $result->fetch_assoc()): ?>
 
     <h2>
+    <a href="view.php?id=<?= $row['id'] ?>">
         <?= htmlspecialchars($row['title']) ?>
+    </a>
     </h2>
 
     <p>
