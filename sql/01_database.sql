@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS study;
+
+USE study;
