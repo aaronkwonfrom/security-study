@@ -50,6 +50,7 @@ $row = $result->fetch_assoc();
 </p>
 
 <a href="edit.php?id=<?= $row['id'] ?>">수정하기</a>
+<a href="delete.php?id=<?= $row['id'] ?>">삭제하기</a>
 <a href="index.php">목록으로</a>
 
 </body>
