@@ -41,6 +41,9 @@ $result = $mysqli->query("SELECT * FROM posts ORDER BY id DESC");
         <?= nl2br(htmlspecialchars($row['content'])) ?>
     </p>
 
+    <a href="login.php">로그인</a>
+    <a href="register.php">회원가입</a>
+
     <hr>
 
 <?php endwhile; ?>
