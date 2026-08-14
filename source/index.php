@@ -25,6 +25,17 @@ $result = $mysqli->query("SELECT * FROM posts ORDER BY id DESC");
 
 <h1>게시판</h1>
 
+<?php if (isset($_SESSION['user_id'])): ?>
+
+    <p>
+        로그인 상태입니다.
+        <?= htmlspecialchars($_SESSION['username']) ?>님 환영합니다.
+    </p>
+
+    <a href="logout.php">로그아웃</a>
+
+<?php endif; ?>
+
 <?php while ($row = $result->fetch_assoc()): ?>
 
     <h2>
