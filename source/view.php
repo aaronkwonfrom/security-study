@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $mysqli = new mysqli(
     "localhost",
@@ -49,8 +50,16 @@ $row = $result->fetch_assoc();
     작성일: <?= htmlspecialchars($row['created_at']) ?>
 </p>
 
-<a href="edit.php?id=<?= $row['id'] ?>">수정하기</a>
-<a href="delete.php?id=<?= $row['id'] ?>">삭제하기</a>
+<?php if (
+    isset($_SESSION['user_id']) &&
+    $_SESSION['user_id'] === $row['user_id']
+): ?>
+
+    <a href="edit.php?id=<?= $row['id'] ?>">수정하기</a>
+    <a href="delete.php?id=<?= $row['id'] ?>">삭제하기</a>
+    
+<?php endif; ?>
+
 <a href="index.php">목록으로</a>
 
 </body>
