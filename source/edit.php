@@ -54,16 +54,6 @@ $row = $result->fetch_assoc();
     </p>
 
     <p>
-        작성자
-        <br>
-        <input
-            type="text"
-            name="author"
-            value="<?= htmlspecialchars($row['author']) ?>"
-        >
-    </p>
-
-    <p>
         내용
         <br>
         <textarea name="content" rows="10" cols="50"><?= htmlspecialchars($row['content']) ?></textarea>

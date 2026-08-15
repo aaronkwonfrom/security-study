@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $title = $_POST["title"];
     $content = $_POST["content"];
-    $author = $_POST["author"];
+    $author = $_SESSION["author"];
 
     $sql = "INSERT INTO posts (title, content, author)
             VALUES ('$title', '$content', '$author')";
@@ -47,11 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </p>
 
     <p>
-        작성자:
-        <input type="text" name="author">
-    </p>
-
-    <p>
         내용:
         <br>
         <textarea name="content" rows="10" cols="50"></textarea>
@@ -60,6 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <button type="submit">작성</button>
 
 </form>
+
+<a href="index.php">목록으로</a>
 
 </body>
 </html>

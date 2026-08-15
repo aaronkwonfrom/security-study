@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit;
+}
 
 $mysqli = new mysqli(
     "localhost",
@@ -32,6 +38,7 @@ $result = $mysqli->query("SELECT * FROM posts ORDER BY id DESC");
         <?= htmlspecialchars($_SESSION['username']) ?>님 환영합니다.
     </p>
 
+    <a href="write.php">게시글 작성</a>
     <a href="logout.php">로그아웃</a>
 
 <?php endif; ?>

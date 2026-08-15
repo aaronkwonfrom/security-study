@@ -7,8 +7,3 @@ information security study
   - Apache, PHP, MySQL 환경 구성
   - 웹 취약점 실습
   - GitHub 관리
-
-## 프로젝트 구성
-docs/
-  - git
-  - ubuntu
