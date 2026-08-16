@@ -76,6 +76,20 @@ $comment_result = $mysqli->query(
 
 <?php endwhile; ?>
 
+<?php endwhile; ?>
+
+
+<?php if (!empty($row["filename"])): ?>
+
+        <p>
+                첨부파일:
+                <a href="<?= htmlspecialchars($row["filepath"]) ?>">
+                        <?= htmlspecialchars($row["filename"]) ?>
+                </a>
+        </p>
+
+<?php endif; ?>
+
 <?php if (isset($_SESSION["user_id"])): ?>
 
     <form method="post" action="comment_write.php">

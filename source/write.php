@@ -17,8 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $content = $_POST["content"];
     $author = $_SESSION["author"];
 
-    $sql = "INSERT INTO posts (title, content, author)
-            VALUES ('$title', '$content', '$author')";
+    $file = $_FILES["file"];
+    $filename = $file["name"];
+    $filepath = "uploads/" . basename($filename);
+
+    move_uploaded_file(
+        $file["tmp_name"],
+        "/var/www/html/" . $filepath
+    );
+
+    $sql = "INSERT INTO posts (title, content, author, filename, filepath)
+            VALUES ('$title', '$content', '$author', '$filename', '$filepath')
+            ";
 
     if ($mysqli->query($sql)) {
         echo "게시글 작성 성공!";
@@ -39,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <h1>게시글 작성</h1>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 
     <p>
         제목:
@@ -50,6 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         내용:
         <br>
         <textarea name="content" rows="10" cols="50"></textarea>
+    </p>
+
+    <p>
+        첨부파일:
+        <input type="file" name="file">
     </p>
 
     <button type="submit">작성</button>
