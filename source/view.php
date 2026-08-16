@@ -50,6 +50,57 @@ $row = $result->fetch_assoc();
     작성일: <?= htmlspecialchars($row['created_at']) ?>
 </p>
 
+<h3>댓글</h3>
+
+<?php
+$comment_result = $mysqli->query(
+    "SELECT * FROM comments
+     WHERE post_id = {$row['id']}
+     ORDER BY id ASC"
+);
+?>
+
+<?php while ($comment = $comment_result->fetch_assoc()): ?>
+
+    <p>
+        <?= htmlspecialchars($comment['author']) ?> :
+        <?= nl2br(htmlspecialchars($comment['content'])) ?>
+
+        <a href="comment_edit.php?id=<?= $comment['id'] ?>">
+            수정
+        </a>
+        <a href="comment_delete.php?id=<?= $comment['id'] ?>">
+            삭제
+        </a>
+    </p>
+
+<?php endwhile; ?>
+
+<?php if (isset($_SESSION["user_id"])): ?>
+
+    <form method="post" action="comment_write.php">
+
+        <input
+            type="hidden"
+            name="post_id"
+            value="<?= $row['id'] ?>"
+        >
+
+        <textarea
+            name="content"
+            rows="4"
+            cols="50"
+            required
+        ></textarea>
+
+        <br>
+
+        <button type="submit">댓글 작성</button>
+
+    </form>
+
+<?php endif; ?>
+
 <?php if (
     isset($_SESSION['user_id']) &&
     $_SESSION['user_id'] === $row['user_id']
@@ -57,7 +108,7 @@ $row = $result->fetch_assoc();
 
     <a href="edit.php?id=<?= $row['id'] ?>">수정하기</a>
     <a href="delete.php?id=<?= $row['id'] ?>">삭제하기</a>
-    
+
 <?php endif; ?>
 
 <a href="index.php">목록으로</a>
