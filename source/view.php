@@ -76,16 +76,13 @@ $comment_result = $mysqli->query(
 
 <?php endwhile; ?>
 
-<?php endwhile; ?>
-
-
 <?php if (!empty($row["filename"])): ?>
 
         <p>
                 첨부파일:
-                <a href="<?= htmlspecialchars($row["filepath"]) ?>">
-                        <?= htmlspecialchars($row["filename"]) ?>
-                </a>
+            <a href="download.php?id=<?= $row['id'] ?>">
+                <?= htmlspecialchars($row["filename"]) ?>
+             </a>
         </p>
 
 <?php endif; ?>
