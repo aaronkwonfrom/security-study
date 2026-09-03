@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION["csrf_token"])) {
+        $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+}
+
 if (!isset($_SESSION["user_id"])) {
         header("Location: login.php");
         exit;
@@ -18,6 +22,13 @@ if ($mysqli->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    if (
+            !isset($_POST["csrf_token"]) ||
+            !hash_equals($_SESSION["csrf_token"], $_POST["csrf_token"])
+    ) {
+            die("CSRF 검증실패");
+    }
 
     $title = $_POST["title"];
     $content = $_POST["content"];
@@ -56,6 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <h1>게시글 작성</h1>
 
 <form method="POST" enctype="multipart/form-data">
+
+        <input
+                type="hidden"
+                name="csrf_token"
+                value="<? htmlspecialchars($_SESSION["csrf_token"]) ?>
 
     <p>
         제목:

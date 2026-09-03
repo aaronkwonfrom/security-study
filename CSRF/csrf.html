@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>CSRF TEST</title>
+</head>
+<body>
+
+<h1>CSRF TEST</h1>
+
+<form method="POST" action="http://localhost/write.php">
+
+        <input
+                type="text" 
+                name="title"
+                value="CSRF Attack Test"
+
+        <textarea name="content">공격자가 작성한 게시글입니다.</textarea>
+
+        <button type="submit">전송</button>
+
+</form>
+
+</body>
+</html>
